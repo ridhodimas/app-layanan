@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('dtsen_purposes', function (Blueprint $table) {
+            $table->id();
+            $table->string('code')->unique();
+            $table->string('name');
+            $table->smallInteger('max_decile')->default(5);
+            $table->integer('validity_days')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->timestampsTz();
+            $table->softDeletesTz();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('dtsen_purposes');
+    }
+};
